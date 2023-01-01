@@ -1,0 +1,1732 @@
+
+.container {
+    max-width: 1920px;
+    margin: 0 auto;
+    position: relative;
+}
+.body{
+    height: 100vh;
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.btn {
+    background: #ff0000;
+    border-radius: 31px;
+    border: none;
+}
+
+.line {
+    width: 18px;
+    height: 2px;
+    margin-top: 3px;
+    background-color: white;
+}
+.sercule {
+    border-radius: 100%;
+    height: 18px;
+    width: 18px;
+    border: 3px solid grey;
+}
+.head {
+    height: 9.6px;
+    width: 9.5px;
+    background: #ffa900;
+    border: none;
+    margin-bottom: 1.2px;
+}
+.arrow {
+    position: absolute;
+    top: 9px;
+    left: 27px;
+    height: 14px;
+    width: 14px;
+}
+.grey_hearth {
+    height: 48px;
+    width: 50px;
+    box-sizing: border-box;
+    border: 1px solid #e1e1e1;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.counter_in_backet > p {
+    cursor: pointer;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 700;
+    line-height: 22px;
+
+    text-align: center;
+
+
+    color: #ffa900;
+}
+.btn_in_backet,
+.counter_in_backet {
+    margin-top: 5px;
+    box-sizing: border-box;
+    height: 42px;
+    width: 109px;
+    background-color: white;
+    color: #ff0000;
+
+    /* red */
+
+    border: 1px solid #ff0000;
+    border-radius: 60px;
+}
+.counter_in_backet {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: #fff8eb;
+    border: 1px solid #ffe7b9;
+    border-radius: 58px;
+}
+.piew_box {
+    max-width: 1289px;
+    display: grid;
+    gap: 24px;
+    grid-template:
+        "bake cashback" 218px
+        "bake total" 218px;
+    grid-template-columns: 2fr 1fr;
+}
+.bake {
+    grid-area: bake;
+    height: 100%;
+    width: 100%;
+    background-image: url(../img/Rectangle\ 12614.png);
+    border-radius: 26px;
+}
+.cashback,
+.total {
+    height: 100%;
+    width: 100%;
+    border-radius: 26px;
+}
+.cashback {
+    grid-area: cashback;
+    background: radial-gradient(55.5% 137.72% at 4.95% 0%, #a9d288 0%, #ceeeb5 100%);
+    position: relative;
+}
+.total {
+    grid-area: total;
+    background: radial-gradient(62.38% 214.22% at 78.22% 32.11%, #ff0000 0%, #ff3103 100%);
+    position: relative;
+}
+.title_bake {
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 50px;
+    line-height: 120%;
+    width: 488px;
+    height: 180px;
+    letter-spacing: -0.02em;
+    margin-top: 112px;
+    margin-left: 52px;
+
+    color: #ffffff;
+}
+.btn_go_shop {
+    width: 272px;
+    margin-top: 24px;
+    margin-left: 52px;
+    height: 56px;
+    border: 2px solid #ffffff;
+    border-radius: 31px;
+    background: none;
+    display: flex;
+    justify-content: center;
+    color: white;
+    align-items: center;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 30px;
+    /* identical to box height */
+
+    color: #ffffff;
+}
+.btn_go_shop::before {
+    content: "Перейти к покукпкам";
+}
+
+.center_box {
+    margin-left: 5vw;
+    margin-right: 5vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    max-width: 1920px;
+}
+.title_cashback {
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 38px;
+    width: 135px;
+    height: 114px;
+    margin-top: 87px;
+    margin-left: 25px;
+    z-index: 2;
+
+    color: #3e5828;
+}
+.img_cashback {
+    position: absolute;
+    height: 100%;
+    top: 0;
+    right: 0;
+}
+
+.text_total {
+    width: 70%;
+    height: 76px;
+    margin-top: 23px;
+    margin-left: 25px;
+
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 38px;
+
+    color: #ffffff;
+}
+.stars {
+    display: flex;
+    margin-top: 78px;
+    margin-left: 25px;
+}
+.img_total {
+    position: absolute;
+    top: 20px;
+    right: 16px;
+}
+.heart {
+    width: 11px;
+    height: 10px;
+    background-color: #dadada;
+    transform: rotate(45deg);
+    position: absolute;
+    top: 17px;
+    right: 21px;
+}
+.red {
+    background-color: red;
+}
+.heart::before,
+.heart::after {
+    content: "";
+    display: block;
+    width: 11px;
+    height: 10px;
+    background-color: inherit;
+    border-radius: 50%;
+    position: absolute;
+}
+.heart::before {
+    top: -6px;
+    left: 0;
+}
+.heart::after {
+    top: 0;
+    left: -6px;
+}
+.card {
+    width: 300px;
+    height: 406px;
+    background: #ffffff;
+    border: 1px solid #dadada;
+    border-radius: 20px;
+    box-sizing: border-box;
+    position: relative;
+    margin-right: 24px;
+}
+.lastCard {
+    margin-right: 0;
+}
+.cards {
+    display: flex;
+    width: 100%;
+    max-width: 1289px;
+    justify-content: space-between;
+    overflow-y: hidden;
+    overflow-x: auto;
+}
+.cards::-webkit-scrollbar {
+    height: 7px;
+}
+.cards::-webkit-scrollbar-thumb {
+    background: #ff0400;
+    border-radius: 10px;
+}
+.cards::-webkit-scrollbar-track {
+    background: white;
+}
+.title_saels {
+    text-decoration: none;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 44px;
+    margin-right: 29px;
+    /* identical to box height */
+
+    color: #000000;
+}
+.sales {
+    width: 100%;
+    max-width: 1289px;
+    margin-top: 102px;
+}
+.sales_top {
+    height: 48px;
+    display: flex;
+    margin-bottom: 37px;
+}
+.show_all {
+    text-decoration: none;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: #da9000;
+    background: #fff8eb;
+    border: 1px solid #ffe7b9;
+    border-radius: 16px;
+    width: 210px;
+    height: 46px;
+}
+.show_all:hover {
+    background: #ffa900;
+    color: white;
+}
+
+.show_all:hover .arrow_sales {
+    border-top: 4px solid white;
+    border-right: 4px solid white;
+}
+
+.arrow_sales {
+    border-top: 4px solid #da9000;
+    border-right: 4px solid #da9000;
+    width: 9px;
+    height: 9px;
+    transform: rotate(45deg);
+}
+.vision {
+    display: none;
+}
+.card_img {
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+.img_product {
+    height: 210px;
+    width: 304px;
+}
+.count {
+    display: flex;
+    justify-content: space-between;
+}
+.product_info {
+    padding: 18px;
+    box-sizing: border-box;
+}
+.price {
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 19px;
+
+    color: #434343;
+}
+.buy {
+    display: flex;
+    justify-content: space-between;
+}
+.real_price {
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 33px;
+    /* identical to box height */
+
+    color: #000000;
+    margin-top: 7px;
+}
+.btn_in_backet {
+    margin-top: 5px;
+    box-sizing: border-box;
+    height: 42px;
+    width: 109px;
+    background-color: white;
+    color: #ff0000;
+
+    /* red */
+
+    border: 1px solid #ff0000;
+    border-radius: 60px;
+}
+.product_name {
+    height: 42px;
+    margin-top: 7px;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 27px;
+    min-height: 82px;
+
+    color: #000000;
+}
+.supermarket {
+    margin-top: 203px;
+}
+.elem_column {
+    margin-right: 23px;
+}
+.lastColumn {
+    margin-right: 0;
+}
+.elems {
+    overflow-y: auto;
+    display: flex;
+    justify-content: space-between;
+    max-width: 1289px;
+}
+.elems::-webkit-scrollbar {
+    height: 7px;
+}
+.elems::-webkit-scrollbar-thumb {
+    background: #ff0400;
+    border-radius: 10px;
+}
+.elems::-webkit-scrollbar-track {
+    background: white;
+}
+body::-webkit-scrollbar {
+    width: 10px;
+}
+body::-webkit-scrollbar-thumb {
+    background: #ff0400;
+    border-radius: 10px;
+}
+body::-webkit-scrollbar-track {
+    background: white;
+}
+
+.img_elem {
+    position: absolute;
+    bottom: 0;
+    right: 24px;
+}
+.two {
+    position: absolute;
+    left: 50px;
+}
+.elem {
+    background: #f7ffe6;
+    border: 1px solid #cce0a0;
+    border-radius: 58px;
+    width: 304px;
+    height: 304px;
+    box-sizing: border-box;
+    margin-bottom: 22px;
+    align-items: start;
+    padding-top: 47px;
+    padding-left: 39px;
+    position: relative;
+}
+.four {
+    position: absolute;
+    left: 30px;
+    bottom: 55px;
+    z-index: 1;
+}
+.six {
+    top: 129px;
+    left: 84px;
+}
+.three {
+    left: 25px;
+    bottom: 8px;
+    z-index: 2;
+}
+.five {
+    right: 14px;
+    bottom: 0;
+    z-index: 3;
+}
+.eleven {
+    bottom: 48px;
+    right: 9px;
+}
+.ten {
+    bottom: 10px;
+    left: 48px;
+}
+.seven {
+    border-bottom-right-radius: 58px;
+    right: 0;
+}
+.nine {
+    right: 5px;
+}
+.eight {
+    left: 8px;
+    bottom: 1px;
+}
+.name_elem {
+    text-decoration: none;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 41px;
+
+    color: #383c5c;
+}
+.name_elem_two {
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 35px;
+
+    color: #ffffff;
+}
+.elem_two {
+    background: #fff8eb;
+    border: 1px solid #ffe7b9;
+}
+.elem_three {
+    background: #ebedff;
+    border: 1px solid #c0c5f2;
+}
+.elem_four {
+    background: #ebfdff;
+    border: 1px solid #a3d0d6;
+}
+.elem_five {
+    height: 449px;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 35px;
+
+    color: #ffffff;
+}
+.one_sale {
+    background: #cd5a7e;
+    border-radius: 30px;
+}
+.two_sale {
+    background: #ff594d;
+    border-radius: 30px;
+}
+.three_sale {
+    background: #ffa68a;
+    border-radius: 30px;
+}
+.four_sale {
+    background: #ffc425;
+    border-radius: 30px;
+}
+
+.map_name {
+    margin-bottom: 5px;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 27px;
+    color: #ff0000;
+}
+.map_text {
+    max-width: 621px;
+    margin-bottom: 30px;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 27px;
+
+    color: #000000;
+}
+.advantages {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+.map_box {
+    display: flex;
+    height: 100%;
+}
+.direction {
+    margin-left: 34px;
+}
+.red_zone {
+    position: absolute;
+    top: 7px;
+    left: 93px;
+}
+.lable {
+    min-height: 164px;
+    margin-top: 94px;
+}
+.labels {
+    width: 100%;
+    max-width: 1298px;
+}
+.lable_one {
+    background: radial-gradient(68.58% 1403.4% at 73.62% -94.51%, #ff1f00 0%, #ff7715 100%)
+        /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+    border-radius: 44px;
+    padding-top: 42px;
+    box-sizing: border-box;
+    display: flex;
+}
+.lable_two {
+    background: #fff8eb;
+    border: 1px solid #ffe7b9;
+    border-radius: 16px;
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+}
+.promo_code {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 121px;
+    padding: 9px;
+
+    background: #ffffff;
+    border-radius: 39px;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 22px;
+    /* identical to box height */
+
+    color: #000000;
+    font-weight: bold;
+}
+.text_lable {
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 38px;
+    line-height: 52px;
+    /* identical to box height */
+
+    color: #ffffff;
+}
+.free_deliver {
+    margin-left: 63px;
+}
+.orange {
+    display: flex;
+    width: calc(166+220+338);
+    justify-content: space-between;
+}
+.text_orange {
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 30px;
+    /* identical to box height */
+
+    color: #ffffff;
+}
+.btn_feedback {
+    border: 2px solid #ff0000;
+    border-radius: 31px;
+    color: #ff0000;
+    width: 238px;
+    height: 56px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: inherit;
+    margin-top: 15px;
+}
+.map {
+    position: relative;
+    margin-top: 20px;
+    height: 633px;
+    width: 480px;
+}
+
+.avacado {
+    position: absolute;
+    left: 937px;
+    top: -46px;
+    transform: rotate(-18.54deg);
+}
+.btn_promo {
+    margin-left: 101px;
+    width: 273px;
+    height: 56px;
+    border: 2px solid #ffffff;
+    background-color: inherit;
+    border-radius: 31px;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 30px;
+    /* identical to box height */
+
+    color: #ffffff;
+}
+.title_lable_two {
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 38px;
+    line-height: 52px;
+    /* identical to box height */
+
+    text-transform: uppercase;
+
+    color: #2e0505;
+    margin-top: 28px;
+    margin-left: 63px;
+}
+.feedback {
+    margin-left: 157px;
+}
+.stars_two {
+    margin-top: 38px;
+
+    width: 238px;
+    display: flex;
+    justify-content: space-between;
+}
+.text_lable_two {
+    font-family: "Nunito";
+    margin-left: 63px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 27px;
+
+    color: #2e0505;
+    width: 353px;
+}
+.twelwe {
+    position: absolute;
+    left: 39px;
+    bottom: 27px;
+}
+.thirdteen {
+    top: 65px;
+    left: 26px;
+    border-bottom-right-radius: 58px;
+}
+.fourteen {
+    top: 88px;
+    left: 77px;
+    border-bottom-right-radius: 58px;
+}
+.fiveteen {
+    top: 88px;
+    left: 64px;
+}
+.sixteen {
+    top: 77px;
+    left: 39px;
+    border-bottom-right-radius: 58px;
+}
+.seventeen {
+    top: 41px;
+    left: 51px;
+    border-bottom-right-radius: 58px;
+}
+.eighteen {
+    top: 58px;
+    left: 50px;
+    border-bottom-right-radius: 58px;
+}
+.nineteen {
+    top: 50px;
+    left: 86px;
+}
+
+
+.get_promo {
+    margin-right: 15px;
+}
+
+.old_price {
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 15px;
+    /* identical to box height */
+
+    text-decoration-line: line-through;
+
+    color: #434343;
+}
+.sale_price {
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 600;
+    line-height: 18;
+    font-size: 24px;
+    line-height: 33px;
+    /* identical to box height */
+
+    color: #cf0000;
+}
+.sale_lable {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 33px;
+    /* identical to box height */
+    position: absolute;
+
+    color: #ffffff;
+    width: 52px;
+    height: 36px;
+    background-color: #ff0000;
+    border-radius: 20px 0px;
+}
+
+
+
+.backet_for_phone {
+    display: none;
+}
+.twenty {
+    top: 143px;
+    left: 48px;
+}
+.twenty_one {
+    top: 170px;
+    left: 95px;
+    z-index: 1;
+}
+.twenty_two {
+    top: 64px;
+    left: 16px;
+}
+.twenty_three {
+    top: 129px;
+    left: 48px;
+}
+.twenty_four {
+    top: 99px;
+    left: 56px;
+}
+.twenty_five {
+    top: 67px;
+    left: 66px;
+    border-bottom-right-radius: 58px;
+}
+.khinkal-1 {
+    width: 128px;
+    height: 118px;
+    top: 130px;
+    left: 10px;
+}
+.khinkal-2 {
+    width: 154px;
+    height: 140px;
+    top: 108px;
+    left: 156px;
+}
+.twenty_six {
+    top: 88px;
+    left: 101px;
+    border-bottom-right-radius: 58px;
+}
+.twenty_seven {
+    top: 112px;
+    left: 34px;
+    border-bottom-right-radius: 58px;
+}
+.twenty_eight {
+    top: 61px;
+    left: 32px;
+}
+.twenty_nine {
+    top: 86px;
+    left: 138px;
+    border-bottom-right-radius: 58px;
+}
+.thirdty {
+    right: 0;
+}
+.thirdty_one {
+    border-bottom-right-radius: 58px;
+    right: 0;
+}
+.thirdty_two {
+    right: 0;
+}
+.thirdty_three {
+    bottom: 0;
+}
+.thirdty_four {
+    top: 100px;
+    right: 0;
+}
+.thirdty_five {
+    left: 0;
+    bottom: 28px;
+}
+
+.visible {
+    display: none;
+}
+@media (max-width: 1000px) {
+    
+    
+    .sercule {
+        border: 3px solid white;
+    }
+    
+    .img_cashback {
+        display: none;
+    }
+}
+@media (max-width: 1400px) {
+    .map_box {
+        flex-direction: column;
+    }
+    .avacado {
+        display: none;
+    }
+}
+@media (max-width: 1200px) {
+    .btn_promo {
+        margin-left: 80px;
+        margin-right: 20px;
+    }
+    .orange {
+        display: none;
+    }
+
+    .direction {
+        margin-left: 0;
+    }
+    .bake {
+        background-size: cover;
+    }
+    .piew_box {
+        grid-template:
+            "bake bake"
+            "cashback total";
+        grid-template-rows: 2fr 1fr;
+        grid-template-columns: 1fr 1fr;
+    }
+    
+}
+@media (max-width: 750px) {
+    
+    .btn_promo {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .feedback {
+        margin-left: 30px;
+        margin-bottom: 8px;
+    }
+    .red_zone {
+        width: 213px;
+        height: 237px;
+        top: 3px;
+        left: 43px;
+    }
+}
+@media (max-width: 450px) {
+    
+    .free_deliver {
+        margin-left: 21px;
+    }
+    .lable {
+        margin-top: 65px;
+    }
+    .text_lable {
+        font-family: "Nunito";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 25px;
+
+        color: #ffffff;
+    }
+    .map {
+        height: auto;
+        width: auto;
+    }
+    footer {
+        height: 110%;
+    }
+    .lable {
+        border-radius: 18px;
+    }
+    .btn_feedback {
+        border: 0.79956px solid #ff0202;
+        border-radius: 24.7864px;
+        height: 31px;
+        width: 180px;
+    }
+    .feedback {
+        margin-bottom: 32px;
+        margin-left: 21px;
+    }
+    .text_lable_two {
+        margin-left: 19px;
+        font-family: "Nunito";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15.75px;
+        line-height: 21px;
+        width: auto;
+
+        color: #2e0505;
+    }
+    .title_lable_two {
+        margin-left: 18px;
+        margin-top: 20px;
+        font-family: "Nunito";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 25px;
+        /* identical to box height */
+
+        text-transform: uppercase;
+
+        color: #2e0505;
+    }
+    .btn_promo {
+        margin-left: 19px;
+        font-family: "Nunito";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14.8909px;
+        line-height: 20px;
+        /* identical to box height */
+        width: 180px;
+        height: 31.5px;
+        text-align: center;
+
+        color: #ffffff;
+        border: 0.79956px solid #ffffff;
+        border-radius: 24.7864px;
+    }
+    .map_img {
+        width: 100%;
+    }
+    .grey_hearth {
+        display: none;
+    }
+    .total {
+        height: 84px;
+        border-radius: 10.0942px;
+    }
+    .img_cashback {
+        display: block;
+    }
+    .title_cashback {
+        font-family: "Nunito";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 12px;
+        line-height: 15px;
+        margin-top: 33px;
+        width: 58px;
+        height: 45px;
+        margin-left: 9px;
+
+        color: #3e5828;
+    }
+    .cashback {
+        height: 84px;
+        border-radius: 10.0942px;
+    }
+    .text_for_phone {
+        font-family: "Nunito";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 8.99998px;
+        line-height: 12px;
+        /* identical to box height */
+
+        text-align: center;
+
+        color: #6b6b6b;
+    }
+    .piew_box {
+        gap: 13px;
+    }
+    .bake {
+        background-blend-mode: normal, multiply, normal;
+        background: url(../img/Rectangle\ 12614.png),
+            radial-gradient(76.52% 265.61% at 69.72% 6.74%, #ffa900 0%, #ff5c00 100%);
+        background-size: cover;
+        border-radius: 11.25px;
+        height: 173px;
+    }
+    .title_bake {
+        height: 67px;
+        margin-top: 42px;
+        margin-left: 19px;
+        font-family: "Nunito";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 120%;
+        /* or 22px */
+
+        letter-spacing: -0.02em;
+        width: 184px;
+
+        color: #ffffff;
+    }
+    .sale_lable {
+        display: none;
+    }
+    .btn_in_backet,
+    .counter_in_backet {
+        width: 131.62px;
+        height: 33.75px;
+        left: 199.12px;
+        top: 885.37px;
+
+        background: #ff0400;
+        border-radius: 8.99998px;
+        font-family: "Nunito";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 13.5px;
+        line-height: 18px;
+        text-align: center;
+
+        /* white */
+
+        color: #ffffff;
+    }
+    .card {
+        width: 156px;
+        border-radius: 11.25px;
+        margin-right: 12px;
+        height: 247.5px;
+    }
+    .arrow {
+        width: 9px;
+        height: 9px;
+        top: 7px;
+        left: 17px;
+    }
+    .img_elem {
+        width: 100%;
+        height: 90px;
+        right: 15px;
+    }
+    .elem {
+        width: 131px;
+        height: 131px;
+        border-radius: 25.026px;
+        padding-top: 20px;
+        padding-left: 16px;
+    }
+    .name_elem {
+        font-family: "Nunito";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 13.5px;
+        line-height: 18px;
+
+        color: #383c5c;
+    }
+    .map_text {
+        font-family: "Nunito";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 25px;
+
+        color: #000000;
+    }
+    .name_elem_two {
+        font-family: "Nunito";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 18.5992px;
+        line-height: 25px;
+
+        color: #ffffff;
+    }
+    .elem_five {
+        height: 321px;
+        width: 221px;
+        font-family: "Nunito";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 26px;
+        line-height: 35px;
+
+        color: #ffffff;
+    }
+    .btn_go_shop::before {
+        content: "К покупкам";
+    }
+    .box_for_phone {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .fire_for_phone {
+        margin-bottom: 4.5px;
+    }
+    .btn_go_shop {
+        width: 129.37px;
+        height: 33.75px;
+
+        border: 1.125px solid #ffffff;
+        border-radius: 34.8749px;
+        font-family: "Nunito";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 15px;
+        line-height: 20px;
+        text-align: center;
+
+        color: #ffffff;
+    }
+    .heart_for_phone {
+        position: static;
+        background-color: #ffa900;
+        opacity: 0.4;
+        margin-top: 5px;
+        margin-bottom: 7px;
+    }
+    .half-cart {
+        height: 100%;
+        width: 100%;
+    }
+    .count_backet {
+        width: 14.6px;
+        height: 14.6px;
+        background: #ffa900;
+        z-index: 1;
+        font-family: "Nunito";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 8.99998px;
+        line-height: 12px;
+        /* identical to box height */
+
+        color: #ff0000;
+        position: absolute;
+        border-radius: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        left: 13.8px;
+        top: -5px;
+    }
+    .arrow_sales {
+        border-top: 3px solid white;
+        border-right: 3px solid white;
+        border-radius: 2px;
+    }
+    .show_all {
+        width: 154.08px;
+        height: 33.75px;
+        background: #ffa900;
+        color: white;
+        border-radius: 11.7391px;
+        font-family: "Ubuntu";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 15.75px;
+        line-height: 18px;
+
+        /* white */
+
+        color: #ffffff;
+    }
+    .sales {
+        margin-top: 24px;
+    }
+    .amount {
+        font-family: "Nunito";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 13.5px;
+        line-height: 18px;
+        /* identical to box height */
+
+        color: #ffffff;
+        margin-top: 8px;
+        margin-left: 8px;
+    }
+    .cart_for_phone {
+        width: 111px;
+        height: 33.75px;
+        display: flex;
+
+        background: #ff0000;
+        border-radius: 11.25px;
+    }
+    .img_backet_phone {
+        margin-top: 6px;
+        margin-left: 13px;
+        height: 18px;
+        width: 22px;
+        margin-right: 0;
+    }
+    .backet_for_phone {
+        box-sizing: border-box;
+        padding-top: 15px;
+        display: flex;
+        justify-content: space-around;
+        margin-top: 21px;
+        height: 66.37px;
+        background: #ffffff;
+        box-shadow: 0px 0px 4.49999px rgba(0, 0, 0, 0.15);
+    }
+    .line_box {
+        margin-bottom: 7.4px;
+        height: 13.9px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .img_product {
+        width: 100%;
+        height: 100%;
+    }
+    .card_img {
+        height: 113px;
+        width: 154px;
+    }
+    .line_for_phone {
+        background: #ffd481;
+        border-radius: 25.6362px;
+        height: 2.7px;
+        width: 16px;
+    }
+    .product_info {
+        padding: 0 9px 12px 9px;
+    }
+    .title_saels {
+        font-family: "Nunito";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 22px;
+        line-height: 30px;
+        color: #000000;
+    }
+    .real_price {
+        font-family: "Nunito";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 13.5px;
+        text-align: right;
+        height: 0;
+        line-height: 0;
+
+        color: #000000;
+    }
+    .sale_price {
+        color: #cf0000;
+    }
+    .heart::after,
+    .heart::before,
+    .heart {
+        height: 9px;
+        width: 9px;
+    }
+    .product_name {
+        font-family: "Nunito";
+        font-style: normal;
+        margin-top: 2px;
+        font-weight: 600;
+        font-size: 11.25px;
+        line-height: 15px;
+        min-height: auto;
+
+        color: #000000;
+    }
+    .buy {
+        flex-direction: column;
+    }
+    .real_price {
+        text-align: left;
+    }
+    .price_box {
+        height: 18px;
+        margin-top: 8px;
+        display: flex;
+        justify-content: space-around;
+    }
+    .old_price {
+        font-family: "Nunito";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 8.99998px;
+        line-height: 12px;
+        /* identical to box height */
+
+        text-decoration-line: line-through;
+
+        color: #434343;
+    }
+    .price {
+        font-family: "Nunito";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 8.99998px;
+        line-height: 12px;
+        /* identical to box height */
+
+        color: #434343;
+    }
+    .text_total {
+        font-family: "Nunito";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 12px;
+        line-height: 15px;
+        margin-top: 9px;
+        margin-left: 9px;
+
+        color: #ffffff;
+    }
+    .stars {
+        margin-top: 30px;
+        margin-left: 9px;
+    }
+    .star_total {
+        height: 8.5px;
+        width: 8.5px;
+    }
+    .img_total {
+        height: 46px;
+        width: 46px;
+    }
+    .shoulders_for_phone {
+        background-color: rgba(255, 169, 0, 0.45);
+        height: 6px;
+        width: 13px;
+    }
+    .profil_img {
+        margin-bottom: 7px;
+    }
+    .sercule {
+        width: 8px;
+        height: 8px;
+        border: 2px solid #ffffff;
+        position: absolute;
+        top: 10px;
+
+        left: 14px;
+    }
+    .head {
+        height: 9.6px;
+        width: 9.5px;
+        background: #ffa900;
+        border: none;
+        margin-bottom: 1.2px;
+    }
+    .head_for_phone {
+        margin-left: 2.7px;
+        height: 7px;
+        width: 7px;
+        position: static;
+        background-color: rgba(255, 169, 0, 0.45);
+        border: none;
+    }
+    .one {
+        width: 115px;
+        height: 61px;
+    }
+    .two {
+        width: 100px;
+        left: 27px;
+        right: 0;
+    }
+    .three {
+        left: 10px;
+        right: 0;
+        width: 120px;
+        height: 45px;
+        z-index: 1;
+    }
+    .four {
+        z-index: 2;
+        bottom: 25px;
+        left: 14px;
+        width: 30px;
+        height: 30px;
+    }
+    .five {
+        bottom: -2px;
+        right: -2px;
+        height: 50%;
+        width: 60px;
+        border-bottom-right-radius: 25.026px;
+    }
+    .six {
+        width: 89px;
+        height: 75px;
+        top: 55px;
+        left: 36px;
+    }
+    .seven {
+        width: 110px;
+        right: 0;
+        height: 80px;
+        border-bottom-right-radius: 25.026px;
+    }
+    .eight {
+        right: 0;
+        bottom: 0;
+        left: -1px;
+        border-bottom-left-radius: 25.026px;
+    }
+    .nine {
+        width: 124px;
+        height: 83px;
+        right: 0;
+        bottom: -2px;
+    }
+    .ten {
+        width: 48px;
+        height: 46px;
+        right: 0;
+        left: 20px;
+        bottom: 4px;
+    }
+    .eleven {
+        width: 62px;
+        height: 59px;
+        right: 3px;
+        bottom: 20px;
+    }
+    .twelwe {
+        width: 114px;
+        height: 71px;
+        top: 48px;
+        left: 16px;
+    }
+    .thirdteen {
+        width: 100px;
+        height: 90px;
+        top: 40px;
+        left: 29.5px;
+        border-bottom-right-radius: 25.026px;
+    }
+    .fourteen {
+        top: 39.5px;
+        left: 39.5px;
+        width: 90px;
+        height: 90px;
+        border-bottom-right-radius: 25.026px;
+    }
+    .fiveteen {
+        top: 30px;
+        left: 20px;
+        width: 100px;
+        height: 90px;
+    }
+    .sixteen {
+        top: 39.5px;
+        left: 29.5px;
+        width: 100px;
+        height: 90px;
+        border-bottom-right-radius: 25.026px;
+    }
+    .seventeen {
+        width: 100px;
+        height: 90px;
+        top: 40px;
+        left: 31px;
+        border-bottom-right-radius: 25.026px;
+    }
+    .eighteen {
+        width: 100px;
+        height: 90px;
+        top: 40px;
+        left: 31px;
+        border-bottom-right-radius: 25.026px;
+    }
+    .nineteen {
+        width: 90px;
+        height: 80px;
+        top: 30px;
+        left: 27px;
+    }
+    .twenty {
+        width: 119px;
+        height: 77px;
+        top: 61px;
+        left: 20px;
+    }
+    .twenty_one {
+        width: 66px;
+        height: 60px;
+        top: 73px;
+        left: 40px;
+        z-index: 1;
+    }
+    .twenty_two {
+        width: 146px;
+        height: 124px;
+        top: 27px;
+        left: 6.7px;
+    }
+    .twenty_three {
+        width: 110px;
+        height: 84px;
+        top: 55px;
+        left: 20px;
+    }
+    .twenty_four {
+        width: 103px;
+        height: 77px;
+        top: 48px;
+        left: 26px;
+        border-bottom-right-radius: 25.026px;
+    }
+    .twenty_five {
+        width: 119px;
+        height: 84px;
+        top: 42px;
+        left: 7px;
+        border-bottom-right-radius: 25.026px;
+        border-top-right-radius: 25.026px;
+    }
+    .khinkal-1 {
+        width: 55px;
+        height: 49px;
+        top: 56px;
+        left: 3px;
+    }
+    .khinkal-2 {
+        width: 66px;
+        height: 60px;
+        top: 46px;
+        left: 66px;
+    }
+    .twenty_six {
+        width: 91px;
+        height: 85px;
+        top: 45px;
+        left: 40px;
+        border-bottom-right-radius: 25.026px;
+    }
+    .twenty_seven {
+        width: 116px;
+        height: 80px;
+        top: 50px;
+        left: 14px;
+        border-bottom-right-radius: 25.026px;
+    }
+    .twenty_eight {
+        width: 120px;
+        height: 81px;
+        top: 26px;
+        left: 13px;
+    }
+    .twenty_nine {
+        width: 83px;
+        height: 99px;
+        top: 31px;
+        left: 63px;
+        border-bottom-right-radius: 58px;
+    }
+    .thirdty {
+        width: 270px;
+        height: 180px;
+        top: 130px;
+        right: 0;
+    }
+    .thirdty_one {
+        width: 240px;
+        height: 180px;
+        right: 0;
+        border-bottom-right-radius: 30px;
+    }
+    .thirdty_two {
+        width: 218px;
+        height: 220px;
+        right: 0;
+    }
+    .thirdty_three {
+        width: 190px;
+        bottom: 0;
+    }
+    .thirdty_four {
+        width: 120px;
+        height: 190px;
+        top: 80px;
+        right: 0;
+    }
+    .thirdty_five {
+        width: 150px;
+        height: 210px;
+        left: 0;
+        bottom: 28px;
+    }
+}
+@media (max-width: 320px) {
+    .red_zone {
+        height: 90%;
+        width: 60%;
+    }
+    .title_saels {
+        margin-right: 23px;
+    }
+    .img_cashback {
+        display: none;
+    }
+    .img_total {
+        display: none;
+    }
+    .text_total {
+        width: auto;
+        height: auto;
+    }
+    
+}
