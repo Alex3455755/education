@@ -23,6 +23,7 @@ class Heart extends React.Component {
 export default class Card extends React.Component {
     constructor(props) {
         super(props);
+        this.dopClass = props.dopClass;
         this.id = props.id;
         this.name = props.name;
         this.price = props.price;
@@ -51,7 +52,7 @@ export default class Card extends React.Component {
     }
     render() {
         return (
-            <div className="card">
+            <div className={'card' + this.dopClass}>
                 <div className="card_img">
                     {this.renderSale()}
                     <img src={this.img} alt="product" className="img_product" />

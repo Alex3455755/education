@@ -1,4 +1,3 @@
-
 * {
     margin: 0;
     padding: 0;
@@ -221,7 +220,6 @@ header {
     position: relative;
 }
 
-
 .profil_modal,
 .reg_modal {
     content: "";
@@ -249,6 +247,14 @@ header {
     text-align: center;
 }
 
+.div_reg > input {
+    border: 1px solid #c4c4c4;
+    border-radius: 12px;
+    width: 264px;
+    height: 46px;
+    text-align: center;
+}
+
 .profil_modal > div > a {
     font-family: "Montserrat";
     font-style: normal;
@@ -268,6 +274,25 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+}
+
+.div_reg > button {
+    width: 264px;
+    height: 46px;
+
+    background: #ff0000;
+    border-radius: 16px;
+    border: none;
+    font-family: "Nunito";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 25px;
+    /* identical to box height */
+
+    text-align: center;
+
+    color: #ffffff;
 }
 
 .profil_modal > div > button,
@@ -314,7 +339,7 @@ header {
     border-radius: 10px;
     transform: rotate(90deg);
 }
-.reg_modal{
+.reg_modal {
     top: 0;
     right: 0;
 }
@@ -906,7 +931,7 @@ input[type="radio"]:checked + label:after {
     color: #868686;
 }
 
-#signIn:disabled{
+#signIn:disabled {
     background-color: #b43131;
 }
 #point > p {
@@ -946,11 +971,11 @@ input[type="radio"]:checked + label:after {
     flex-direction: column;
     justify-content: space-between;
 }
-.input_valid:focus{
+.input_valid:focus {
     background: rgba(102, 211, 102, 0.486);
 }
 
-.input_invalid:focus{
+.input_invalid:focus {
     background-color: rgba(252, 109, 109, 0.493);
 }
 

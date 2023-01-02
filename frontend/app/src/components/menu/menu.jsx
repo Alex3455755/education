@@ -1,6 +1,7 @@
 import classes from './menu.css';
 import React from 'react';
-const link = 'http://192.168.0.52:3000'
+import Card from '../card/card.jsx';
+const link = 'http://192.168.0.52:3000';
 
 class MenuForPhone extends React.Component {
     constructor(props) {
@@ -185,6 +186,47 @@ class MenuForDesktop extends React.Component {
     }
 }
 
+class FormSign extends React.Component {
+    constructor(props) {
+        super(props)
+        this.btnText = props.text;
+        this.state = { validlogin: '', validpas: '', activeButton: true }
+        this.fn = props.fn;
+        this.validInput = this.validInput.bind(this);
+        this.isRegistr = props.isRegistr;
+    }
+    validInput({ target }) {
+        if (target.type === 'text') {
+            const a = 'validlogin';
+            if (target.value.length < 8) {
+                this.setState({ [a]: 'input_invalid' });
+            } else {
+                this.setState({ [a]: 'input_valid' });
+            }
+        }
+        else {
+            const a = 'validpas';
+            if (/(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9!@#$%^&*a-zA-Z]{5,}/g.test(target.value)) {
+                this.setState({ [a]: 'input_valid' });
+            } else {
+                this.setState({ [a]: 'input_invalid' });
+            }
+        }
+        if (this.state.validlogin === 'input_valid' && this.state.validpas === 'input_valid') {
+            this.setState({ activeButton: false });
+        }
+        else { this.setState({ activeButton: true }) }
+    }
+    render() {
+        return (
+            <div className='div_reg'>
+                <input className={this.state.validlogin} type="text" placeholder="Логин" id={this.isRegistr ? 'regname' : 'name'} onChange={this.validInput} />
+                <input className={this.state.validpas} type="password" placeholder="Пароль" id={this.isRegistr ? 'regpassword' : 'password'} onChange={this.validInput} />
+                <button id="signIn" disabled={this.state.activeButton} onClick={this.fn}>{this.btnText}</button>
+            </div>
+        )
+    }
+}
 
 export default class Menu extends React.Component {
     constructor(props) {
@@ -279,7 +321,29 @@ class ModalCatalog extends React.Component {
     }
 }
 class ModalSearch extends React.Component {
-
+    constructor(props) {
+        super(props)
+        this.serching = this.serching.bind(this);
+        this.state = {
+            resultList: [{ id: 1, name: 'Мюсли', amount: 4, price: 144 },
+            { id: 3, name: 'Мюсли', amount: 6, price: 215 },
+            { id: 7, name: 'Мюсли', amount: 9, price: 164 }]
+        }
+    }
+    serching() {
+        const inputValue = { value: document.querySelector('.search_place').value };
+        fetch("http://192.168.0.52:3000/input", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(inputValue)
+        })
+            .then(res => (res.json()))
+            .then(data => {
+                this.setState({ resultList: data });
+            })
+    }
     render() {
 
         return (
@@ -287,13 +351,17 @@ class ModalSearch extends React.Component {
                 <div className="center_box">
                     <div className="input_box">
                         <input type="text" className="search_place" maxLength="50" />
-                        <div className="sercule_search">
+                        <div className="sercule_search" onClick={this.serching}>
                             <div className="search_line"></div>
                         </div>
                     </div>
                 </div>
                 <div className="search_result">
                     <div className="cards_search">
+                        {this.state.resultList.map((item) => {
+                            return <Card key={item.id} id={item.id} price={item.price} img={"./" + item.img}
+                                name={item.name} count={item.amount} dopClass=' search_card' />
+                        })}
                     </div>
                 </div>
             </div>
@@ -305,36 +373,11 @@ class ModalSign extends React.Component {
         super(props)
         this.fn = props.fn
         this.state = {
-            visRegistr: false, activeButton: true
-            , userSign: props.userSign, validlogin: '',
-            validpas: '',
+            visRegistr: false, userSign: props.userSign,
         }
         this.setVis = this.setVis.bind(this);
         this.closModal = this.closModal.bind(this);
         this.whatRender = this.whatRender.bind(this);
-        this.validInput = this.validInput.bind(this);
-    }
-    validInput({ target }) {
-        if (target.type === 'text') {
-            const a = 'validlogin';
-            if (target.value.length < 8) {
-                this.setState({ [a]: 'input_invalid' });
-            } else {
-                this.setState({ [a]: 'input_valid' });
-            }
-        }
-        else {
-            const a = 'validpas';
-            if (/(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9!@#$%^&*a-zA-Z]{5,}/g.test(target.value)) {
-                this.setState({ [a]: 'input_valid' });
-            } else {
-                this.setState({ [a]: 'input_invalid' });
-            }
-        }
-        if (this.state.validlogin === 'input_valid' && this.state.validpas === 'input_valid') {
-            this.setState({ activeButton: false });
-        }
-        else{this.setState({activeButton: true})}
     }
     whatRender(logic) {
         if (logic) {
@@ -346,9 +389,18 @@ class ModalSign extends React.Component {
                     </div>
                     <h3>Зарегестрируйтесь </h3>
                     <div className="div_reg">
-                        <input type="text" placeholder="Логин" className="login" />
-                        <input type="text" placeholder="Пароль" className="password" />
-                        <button id="signUp">Регистрация</button>
+                        <FormSign text='Зарегестрироваться' fn={() => {
+                            fetch(link + '/sign', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json;charset=utf-8'
+                                },
+                                body: JSON.stringify({
+                                    name: document.getElementById('regname').value,
+                                    password: document.getElementById('regpassword').value
+                                }),
+                            });
+                        }} isRegistr={true} />
                     </div>
                 </div>
             )
@@ -361,20 +413,6 @@ class ModalSign extends React.Component {
         if (e.target.classList.contains('registration')) {
             this.setState({ visRegistr: true })
         }
-    }
-    serverSign() {
-        fetch(link + '/sign', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8'
-            },
-            body: JSON.stringify({name: document.getElementById('name').value,
-            password: document.getElementById('password').value}),
-        });
-        /* .then((res) => res.json())
-        .then((data) => {
-            console.log(data)
-        }) */
     }
     render() {
         if (window.userSign) {
@@ -398,9 +436,22 @@ class ModalSign extends React.Component {
             <div className="profil_modal">
                 <h3>Авторизируйтесь </h3>
                 <div className="div_reg">
-                    <input className={this.state.validlogin} type="text" placeholder="Логин" id="name" onChange={this.validInput} />
-                    <input className={this.state.validpas} type="password" placeholder="Пароль" id="password" onChange={this.validInput} />
-                    <button id="signIn" disabled={this.state.activeButton} onClick={this.serverSign}>Войти</button>
+                    <FormSign text='Войти' fn={() => {
+                        fetch(link + '/sign', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json;charset=utf-8'
+                            },
+                            body: JSON.stringify({
+                                name: document.getElementById('name').value,
+                                password: document.getElementById('password').value
+                            }),
+                        });
+                        /* .then((res) => res.json())
+                        .then((data) => {
+                            console.log(data)
+                        }) */
+                    }} isRegistr={false} />
                     <div className="registration" onClick={this.setVis}>Регистрация</div>
                 </div>
                 {this.whatRender(this.state.visRegistr)}

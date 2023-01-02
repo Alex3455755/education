@@ -29,6 +29,17 @@ const connection = mysql.createConnection({
   password: "MySql:65108bipE;"
 });
 
+app.post('/input', jsonParser, function (req, res) {
+  const request = req.body;
+  connection.query('SELECT name,price,amount,oldPrice,sale,img,id FROM cards', function (err, data) {
+    const result = data.filter(({ name }) => {
+      return name.match(new RegExp(request.value, 'gui'))
+    });
+    if (result.length) { res.json(result) }
+    else { res.json([{ name: "нет данных", price: 0, amount: "", oldPrice: "", img: "" }]) }
+  });
+});
+
 app.get('/nav',(req,res)=>{
   res.json({list: menuDate});
 });
@@ -36,7 +47,8 @@ app.get('/nav',(req,res)=>{
 app.post('/sign', jsonParser, function (req, res) {
   const name = req.body.name;
   const passwordInput = req.body.password;
-  connection.query('SELECT name,password,id,role,lovleList FROM users where name = ?', [name], function (err, data) {
+  console.log(name,passwordInput)
+  /* connection.query('SELECT name,password,id,role,lovleList FROM users where name = ?', [name], function (err, data) {
     if (!data.length) { res.json({ err: true, message: 'пользователь с таким логином не зарегестрирован' }) }
     else {
       let listlove = data[0].lovleList.split(' ');
@@ -52,7 +64,7 @@ app.post('/sign', jsonParser, function (req, res) {
           }
         });
     }
-  });
+  }); */
 });
 
 app.post('/login', jsonParser, function (req, res) {
