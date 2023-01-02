@@ -36,8 +36,7 @@ app.get('/nav',(req,res)=>{
 app.post('/sign', jsonParser, function (req, res) {
   const name = req.body.name;
   const passwordInput = req.body.password;
-  console.log(passwordInput)
-  /* connection.query('SELECT name,password,id,role,lovleList FROM users where name = ?', [name], function (err, data) {
+  connection.query('SELECT name,password,id,role,lovleList FROM users where name = ?', [name], function (err, data) {
     if (!data.length) { res.json({ err: true, message: 'пользователь с таким логином не зарегестрирован' }) }
     else {
       let listlove = data[0].lovleList.split(' ');
@@ -53,7 +52,25 @@ app.post('/sign', jsonParser, function (req, res) {
           }
         });
     }
-  }); */
+  });
+});
+
+app.post('/login', jsonParser, function (req, res) {
+  const name = req.body.name;
+  const password = req.body.password;
+  console.log(name,password)
+  /* connection.query('SELECT name,id,role FROM users WHERE name=?', [name], (err, data) => {
+    if (data.length) {
+      res.json({ err: true, message: 'пользователь с таким именем уже существует' });
+    } else {
+      newPas = argon2.hash(password)
+        .then((val) => {
+          connection.query('INSERT INTO users(name,password,role) VALUE(?,?,?)', [name, val, "user"]);
+        });
+      const token = jwt.sign({ name: name, role: 'user' }, secret, { expiresIn: '2h' });
+      res.json({ err: false, jwt: token, name: name, role: 'user' });
+    }
+  }) */
 });
 
 app.get('/*', (req, res) => {

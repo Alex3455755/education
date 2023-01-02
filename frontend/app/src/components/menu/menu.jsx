@@ -325,16 +325,16 @@ class ModalSign extends React.Component {
         }
         else {
             const a = 'validpas';
-            if (/(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9!@#$%^&*a-zA-Z]{6,}/g.test(target.value)) {
+            if (/(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])[0-9!@#$%^&*a-zA-Z]{5,}/g.test(target.value)) {
                 this.setState({ [a]: 'input_valid' });
             } else {
                 this.setState({ [a]: 'input_invalid' });
             }
         }
-
         if (this.state.validlogin === 'input_valid' && this.state.validpas === 'input_valid') {
             this.setState({ activeButton: false });
         }
+        else{this.setState({activeButton: true})}
     }
     whatRender(logic) {
         if (logic) {
@@ -363,40 +363,48 @@ class ModalSign extends React.Component {
         }
     }
     serverSign() {
-    /* .then((res) => res.json())
-    .then((data) => {
-        console.log(data)
-    }) */
-}
-render() {
-    if (window.userSign) {
+        fetch(link + '/sign', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({name: document.getElementById('name').value,
+            password: document.getElementById('password').value}),
+        });
+        /* .then((res) => res.json())
+        .then((data) => {
+            console.log(data)
+        }) */
+    }
+    render() {
+        if (window.userSign) {
+            return (
+                < div className="profil_modal_user">
+                    <p id="active_name">Имя Фамилия</p>
+                    <p>Профиль</p>
+                    <div id="point">
+                        <p>Заказы</p>
+                        <div className="point"></div>
+                    </div>
+                    <div id="point">
+                        <p>Избранное</p>
+                        <p id="lovList">0 тов.</p>
+                    </div>
+                    <p>Выход</p>
+                </div >
+            )
+        }
         return (
-            < div className="profil_modal_user">
-                <p id="active_name">Имя Фамилия</p>
-                <p>Профиль</p>
-                <div id="point">
-                    <p>Заказы</p>
-                    <div className="point"></div>
+            <div className="profil_modal">
+                <h3>Авторизируйтесь </h3>
+                <div className="div_reg">
+                    <input className={this.state.validlogin} type="text" placeholder="Логин" id="name" onChange={this.validInput} />
+                    <input className={this.state.validpas} type="password" placeholder="Пароль" id="password" onChange={this.validInput} />
+                    <button id="signIn" disabled={this.state.activeButton} onClick={this.serverSign}>Войти</button>
+                    <div className="registration" onClick={this.setVis}>Регистрация</div>
                 </div>
-                <div id="point">
-                    <p>Избранное</p>
-                    <p id="lovList">0 тов.</p>
-                </div>
-                <p>Выход</p>
-            </div >
+                {this.whatRender(this.state.visRegistr)}
+            </div>
         )
     }
-    return (
-        <div className="profil_modal">
-            <h3>Авторизируйтесь </h3>
-            <div className="div_reg">
-                <input className={this.state.validlogin} type="text" placeholder="Логин" id="name" onChange={this.validInput} />
-                <input className={this.state.validpas} type="password" placeholder="Пароль" id="password" onChange={this.validInput} />
-                <button id="signIn" disabled={this.state.activeButton} onClick={this.serverSign}>Войти</button>
-                <div className="registration" onClick={this.setVis}>Регистрация</div>
-            </div>
-            {this.whatRender(this.state.visRegistr)}
-        </div>
-    )
-}
 }
