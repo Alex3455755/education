@@ -3,14 +3,17 @@ const app = express();
 const jsonParser = express.json();
 const path = require('path');
 const mysql = require("mysql2");
+const argon2 = require('argon2');
+const jwt = require('jsonwebtoken');
+const secret = 'bipE';
 
 const menuDate = [
-  { title: "Супермаркет", img: "img/apple.svg", alt: "apple", href: "http://192.168.0.52:3000/catalog?catigore=",id: 0 },
-  { title: "Кулинария", img: "img/pizza.svg", alt: "cook", href: "http://192.168.0.52:3000/catalog?catigore=",id: 1 },
-  { title: "Заморозка", img: "img/trsto.svg", alt: "freez", href: "http://192.168.0.52:3000/catalog?catigore=",id: 2 },
-  { title: "Другое", img: "img/meat.svg", alt: "another", href: "http://192.168.0.52:3000/catalog?catigore=",id: 3 },
-  { title: "Акции", img: "img/fire.svg", alt: "sale", href: "http://192.168.0.52:3000/catalog?catigore=",id:  4},
-  { title: "Магазин", img: "img/lolipop.svg", alt: "market", href: "#market",id: 5},
+  { title: "Супермаркет", img: "img/apple.svg", alt: "apple", href: "http://192.168.0.52:3000/catalog?catigore=", id: 0 },
+  { title: "Кулинария", img: "img/pizza.svg", alt: "cook", href: "http://192.168.0.52:3000/catalog?catigore=", id: 1 },
+  { title: "Заморозка", img: "img/trsto.svg", alt: "freez", href: "http://192.168.0.52:3000/catalog?catigore=", id: 2 },
+  { title: "Другое", img: "img/meat.svg", alt: "another", href: "http://192.168.0.52:3000/catalog?catigore=", id: 3 },
+  { title: "Акции", img: "img/fire.svg", alt: "sale", href: "http://192.168.0.52:3000/catalog?catigore=", id: 4 },
+  { title: "Магазин", img: "img/lolipop.svg", alt: "market", href: "#market", id: 5 },
 ];
 const catigoriesText = [
   { title: "Супермаркет", num: "3", isCheked: false, list: ["Снэки и сухофрукты", "Кофе, чай и сладости", "Макароны и крупы", "Хлеб и выпечка", "Масло, соусы и специи", "Консервы и соления"], isNoFirst: true, isElems: true },
@@ -40,15 +43,14 @@ app.post('/input', jsonParser, function (req, res) {
   });
 });
 
-app.get('/nav',(req,res)=>{
-  res.json({list: menuDate});
+app.get('/nav', (req, res) => {
+  res.json({ list: menuDate });
 });
 
 app.post('/sign', jsonParser, function (req, res) {
   const name = req.body.name;
   const passwordInput = req.body.password;
-  console.log(name,passwordInput)
-  /* connection.query('SELECT name,password,id,role,lovleList FROM users where name = ?', [name], function (err, data) {
+  connection.query('SELECT name,password,id,role,lovleList FROM users where name = ?', [name], function (err, data) {
     if (!data.length) { res.json({ err: true, message: 'пользователь с таким логином не зарегестрирован' }) }
     else {
       let listlove = data[0].lovleList.split(' ');
@@ -64,14 +66,37 @@ app.post('/sign', jsonParser, function (req, res) {
           }
         });
     }
-  }); */
+  });
+});
+
+app.post('/auth', jsonParser, function (req, res) {
+  try {
+    const result = jwt.verify(req.body.jwt, secret);
+    connection.query('SELECT lovleList,cartList from users where name=?', [result.name], (err, data) => {
+      if (data[0]) {
+        const list = data[0] ? data[0].lovleList.split(' ').filter((item) => item != '') : [];
+        res.json({
+          name: result.name, succes: true, role: result.role,
+          loveList: list, cartList: data[0].cartList === ' ' ? '' : JSON.parse(data[0].cartList)
+        });
+      }else{
+        res.json({
+          name: result.name, succes: true, role: result.role,
+          loveList: [], cartList: [],
+        });
+      }
+
+    });
+  } catch (TokenExpiredError) {
+    console.log('time men');
+  }
+
 });
 
 app.post('/login', jsonParser, function (req, res) {
   const name = req.body.name;
   const password = req.body.password;
-  console.log(name,password)
-  /* connection.query('SELECT name,id,role FROM users WHERE name=?', [name], (err, data) => {
+  connection.query('SELECT name,id,role,lovleList FROM users WHERE name=?', [name], (err, data) => {
     if (data.length) {
       res.json({ err: true, message: 'пользователь с таким именем уже существует' });
     } else {
@@ -80,9 +105,23 @@ app.post('/login', jsonParser, function (req, res) {
           connection.query('INSERT INTO users(name,password,role) VALUE(?,?,?)', [name, val, "user"]);
         });
       const token = jwt.sign({ name: name, role: 'user' }, secret, { expiresIn: '2h' });
-      res.json({ err: false, jwt: token, name: name, role: 'user' });
+      res.json({ err: false, jwt: token, name: name, role: 'user', });
     }
-  }) */
+  })
+});
+
+app.post('/list', jsonParser, (req, res) => {
+  const result = jwt.verify(req.body.jwt, secret);
+  connection.query('SELECT lovleList,cartList FROM users WHERE name=?', [result.name], (err, data) => {
+    if(data[0]){
+      res.json({
+        lovleList: data[0].lovleList.split(' ').filter((item) => item != ''),
+        cartList: data[0].cartList === ' ' ? '' : JSON.parse(data[0].cartList),
+        name: result.name,
+      });
+    }
+    else{res.json({lovleList: [],cartList: [],name: result.name})}
+  });
 });
 
 app.get('/*', (req, res) => {
@@ -91,7 +130,7 @@ app.get('/*', (req, res) => {
 
 
 
-  
+
 const PORT = 8000;
-  
+
 app.listen(PORT, console.log(`Server started on port ${PORT}`));

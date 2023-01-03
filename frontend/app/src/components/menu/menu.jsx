@@ -95,15 +95,13 @@ class MenuForDesktop extends React.Component {
         super(props)
         this.ascentEvent = this.ascentEvent.bind(this);
         this.myRef = React.createRef();
+        this.callback = props.callback;
         this.state = {
             visSearch: false,
             visCatalog: false,
             visSign: false,
             userSign: props.userSign,
         }
-    }
-    change(str) {
-        console.log(str)
     }
     ascentEvent({ currentTarget }) {
         const list = currentTarget.classList;
@@ -119,7 +117,7 @@ class MenuForDesktop extends React.Component {
                 case 'ModalCatalog':
                     return <ModalCatalog />;
                 case 'ModalSign':
-                    return <ModalSign fn={this.change} />
+                    return <ModalSign fn={this.callback} />
                 default:
                     return;
             }
@@ -231,12 +229,13 @@ class FormSign extends React.Component {
 export default class Menu extends React.Component {
     constructor(props) {
         super(props)
-        this.userSign = props.userSign
         this.screnSizeVids = this.props.screnSizeVids;
+        this.state = { userSign: props.userSign }
+        this.callback = props.calback;
     }
     whatRender() {
         if (this.screnSizeVids > 450) {
-            return <MenuForDesktop />
+            return <MenuForDesktop callback={this.callback} />
         } else {
             return <MenuForPhone />
         }
@@ -369,13 +368,35 @@ class ModalSearch extends React.Component {
 class ModalSign extends React.Component {
     constructor(props) {
         super(props)
-        this.fn = props.fn
+        this.fn = props.fn;
         this.state = {
             visRegistr: false, userSign: props.userSign,
+            name: '',loveListCount: 0,
         }
         this.setVis = this.setVis.bind(this);
         this.closModal = this.closModal.bind(this);
         this.whatRender = this.whatRender.bind(this);
+        this.serverRespnse = this.serverRespnse.bind(this);
+        this.serverRequest = this.serverRequest.bind(this);
+        this.exit = this.exit.bind(this);
+    }
+    serverRespnse() {
+        fetch(link + '/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({
+                name: document.getElementById('regname').value,
+                password: document.getElementById('regpassword').value
+            }),
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            document.cookie = `${data.jwt}; max-age=3600`;
+            window.userSign = true;
+            this.setState({name: data.name});
+        })
     }
     whatRender(logic) {
         if (logic) {
@@ -387,18 +408,7 @@ class ModalSign extends React.Component {
                     </div>
                     <h3>Зарегестрируйтесь </h3>
                     <div className="div_reg">
-                        <FormSign text='Зарегестрироваться' fn={() => {
-                            fetch(link + '/sign', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json;charset=utf-8'
-                                },
-                                body: JSON.stringify({
-                                    name: document.getElementById('regname').value,
-                                    password: document.getElementById('regpassword').value
-                                }),
-                            });
-                        }} isRegistr={true} />
+                        <FormSign text='Зарегестрироваться' fn={this.serverRespnse} isRegistr={true} />
                     </div>
                 </div>
             )
@@ -412,11 +422,44 @@ class ModalSign extends React.Component {
             this.setState({ visRegistr: true })
         }
     }
+    serverRequest(){
+        fetch(link + '/sign', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify({
+                name: document.getElementById('name').value,
+                password: document.getElementById('password').value
+            }),
+        })
+        .then((res) => res.json())
+        .then((data) => {
+            document.cookie = `${data.jwt}; max-age=3600`;
+            window.userSign = true;
+            this.setState({name: data.name,loveListCount: data.lovleList.length});
+        })
+    }
+    exit(){
+        window.userSign = false;
+        this.setState({name: ''});
+        document.cookie = 'name; max-age=1';
+    }
     render() {
         if (window.userSign) {
+            fetch(link + '/list', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8'
+                },
+                body: JSON.stringify({jwt: document.cookie}),
+            }).then((res) => res.json())
+                .then((data) => {
+                    this.setState({name: data.name,loveListCount: data.lovleList.length});
+                })
             return (
                 < div className="profil_modal_user">
-                    <p id="active_name">Имя Фамилия</p>
+                    <p id="active_name">{this.state.name}</p>
                     <p>Профиль</p>
                     <div id="point">
                         <p>Заказы</p>
@@ -424,9 +467,9 @@ class ModalSign extends React.Component {
                     </div>
                     <div id="point">
                         <p>Избранное</p>
-                        <p id="lovList">0 тов.</p>
+                        <p id="lovList">{this.state.loveListCount  + 'тов.'}</p>
                     </div>
-                    <p>Выход</p>
+                    <p onClick={this.exit}>Выход</p>
                 </div >
             )
         }
@@ -434,22 +477,7 @@ class ModalSign extends React.Component {
             <div className="profil_modal">
                 <h3>Авторизируйтесь </h3>
                 <div className="div_reg">
-                    <FormSign text='Войти' fn={() => {
-                        fetch(link + '/sign', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json;charset=utf-8'
-                            },
-                            body: JSON.stringify({
-                                name: document.getElementById('name').value,
-                                password: document.getElementById('password').value
-                            }),
-                        });
-                        /* .then((res) => res.json())
-                        .then((data) => {
-                            console.log(data)
-                        }) */
-                    }} isRegistr={false} />
+                    <FormSign text='Войти' fn={this.serverRequest} isRegistr={false} />
                     <div className="registration" onClick={this.setVis}>Регистрация</div>
                 </div>
                 {this.whatRender(this.state.visRegistr)}
