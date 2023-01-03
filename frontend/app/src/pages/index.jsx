@@ -31,7 +31,7 @@ export default class Index extends React.Component {
                             <img src="img/star_2b50.svg" alt="star" className="star_total" />
                         </div>
                         <div className="text_total">Оставьте отзыв и получи 5% скидку</div>
-                        <img src="img/thumbs-up_1f44d 1.svg" alt="like" className="img_total" />
+                        <img src="img/like.svg" alt="like" className="img_total" />
                     </div>
                 </div>
             </div>

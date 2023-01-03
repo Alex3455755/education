@@ -5,7 +5,7 @@ const path = require('path');
 const mysql = require("mysql2");
 
 const menuDate = [
-  { title: "Супермаркет", img: "img/Rectangle 12613.svg", alt: "apple", href: "http://192.168.0.52:3000/catalog?catigore=",id: 0 },
+  { title: "Супермаркет", img: "img/apple.svg", alt: "apple", href: "http://192.168.0.52:3000/catalog?catigore=",id: 0 },
   { title: "Кулинария", img: "img/pizza.svg", alt: "cook", href: "http://192.168.0.52:3000/catalog?catigore=",id: 1 },
   { title: "Заморозка", img: "img/trsto.svg", alt: "freez", href: "http://192.168.0.52:3000/catalog?catigore=",id: 2 },
   { title: "Другое", img: "img/meat.svg", alt: "another", href: "http://192.168.0.52:3000/catalog?catigore=",id: 3 },

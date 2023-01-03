@@ -325,9 +325,7 @@ class ModalSearch extends React.Component {
         super(props)
         this.serching = this.serching.bind(this);
         this.state = {
-            resultList: [{ id: 1, name: 'Мюсли', amount: 4, price: 144 },
-            { id: 3, name: 'Мюсли', amount: 6, price: 215 },
-            { id: 7, name: 'Мюсли', amount: 9, price: 164 }]
+            resultList: []
         }
     }
     serching() {
@@ -359,7 +357,7 @@ class ModalSearch extends React.Component {
                 <div className="search_result">
                     <div className="cards_search">
                         {this.state.resultList.map((item) => {
-                            return <Card key={item.id} id={item.id} price={item.price} img={"./" + item.img}
+                            return <Card key={item.id} id={item.id} price={item.price} img={item.img}
                                 name={item.name} count={item.amount} dopClass=' search_card' />
                         })}
                     </div>
