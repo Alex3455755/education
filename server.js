@@ -39,7 +39,7 @@ app.post('/input', jsonParser, function (req, res) {
       return name.match(new RegExp(request.value, 'gui'))
     });
     if (result.length) { res.json(result) }
-    else { res.json([{ name: "нет данных", price: 0, amount: "", oldPrice: "", img: "" }]) }
+    else { res.json([{ id: 0,name: "нет данных", price: 0, amount: "", oldPrice: "", img: "" }]) }
   });
 });
 
@@ -67,6 +67,17 @@ app.post('/sign', jsonParser, function (req, res) {
         });
     }
   });
+});
+
+app.post('/lovers', jsonParser, function (req, res) {
+  const logic = req.body.del;
+  const id = req.body.id;
+  const result = jwt.verify(req.body.jwt, secret);
+  if (logic) {
+    connection.query(`UPDATE users SET lovleList= REPLACE(lovleList,?,'') WHERE name=?`, [" " + id, result.name],)
+  } else {
+    connection.query(`UPDATE users SET lovleList= CONCAT(lovleList," ",?) WHERE name=?`, [id, result.name],)
+  }
 });
 
 app.post('/auth', jsonParser, function (req, res) {

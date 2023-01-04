@@ -324,7 +324,7 @@ class ModalSearch extends React.Component {
         super(props)
         this.serching = this.serching.bind(this);
         this.state = {
-            resultList: []
+            resultList: [], listlov: []
         }
     }
     serching() {
@@ -337,14 +337,25 @@ class ModalSearch extends React.Component {
             body: JSON.stringify(inputValue)
         })
             .then(res => (res.json()))
-            .then(data => {
-                this.setState({ resultList: data });
+            .then(datain => {   
+                fetch(link + '/list', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    body: JSON.stringify({ jwt: document.cookie }),
+                })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        this.setState({ listlov: data.lovleList, resultList: datain});
+                    })
             })
+
     }
     render() {
 
         return (
-            <div className="search_modal">
+            <div className="search_modal" >
                 <div className="center_box">
                     <div className="input_box">
                         <input type="text" className="search_place" maxLength="50" />
@@ -357,7 +368,7 @@ class ModalSearch extends React.Component {
                     <div className="cards_search">
                         {this.state.resultList.map((item) => {
                             return <Card key={item.id} id={item.id} price={item.price} img={item.img}
-                                name={item.name} count={item.amount} dopClass=' search_card' />
+                                name={item.name} count={item.amount} dopClass=' search_card' inlov={this.state.listlov.indexOf(item.id.toString()) !== -1} />
                         })}
                     </div>
                 </div>
@@ -371,7 +382,7 @@ class ModalSign extends React.Component {
         this.fn = props.fn;
         this.state = {
             visRegistr: false, userSign: props.userSign,
-            name: '',loveListCount: 0,
+            name: '', loveListCount: 0,
         }
         this.setVis = this.setVis.bind(this);
         this.closModal = this.closModal.bind(this);
@@ -391,12 +402,12 @@ class ModalSign extends React.Component {
                 password: document.getElementById('regpassword').value
             }),
         })
-        .then((res) => res.json())
-        .then((data) => {
-            document.cookie = `${data.jwt}; max-age=3600`;
-            window.userSign = true;
-            this.setState({name: data.name});
-        })
+            .then((res) => res.json())
+            .then((data) => {
+                document.cookie = `${data.jwt}; max-age=7200`;
+                window.userSign = true;
+                this.setState({ name: data.name });
+            })
     }
     whatRender(logic) {
         if (logic) {
@@ -422,7 +433,7 @@ class ModalSign extends React.Component {
             this.setState({ visRegistr: true })
         }
     }
-    serverRequest(){
+    serverRequest() {
         fetch(link + '/sign', {
             method: 'POST',
             headers: {
@@ -433,16 +444,16 @@ class ModalSign extends React.Component {
                 password: document.getElementById('password').value
             }),
         })
-        .then((res) => res.json())
-        .then((data) => {
-            document.cookie = `${data.jwt}; max-age=3600`;
-            window.userSign = true;
-            this.setState({name: data.name,loveListCount: data.lovleList.length});
-        })
+            .then((res) => res.json())
+            .then((data) => {
+                document.cookie = `${data.jwt}; max-age=3600`;
+                window.userSign = true;
+                this.setState({ name: data.name, loveListCount: data.lovleList.length });
+            })
     }
-    exit(){
+    exit() {
         window.userSign = false;
-        this.setState({name: ''});
+        this.setState({ name: '' });
         document.cookie = 'name; max-age=1';
     }
     render() {
@@ -452,10 +463,10 @@ class ModalSign extends React.Component {
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'
                 },
-                body: JSON.stringify({jwt: document.cookie}),
+                body: JSON.stringify({ jwt: document.cookie }),
             }).then((res) => res.json())
                 .then((data) => {
-                    this.setState({name: data.name,loveListCount: data.lovleList.length});
+                    this.setState({ name: data.name, loveListCount: data.lovleList.length });
                 })
             return (
                 < div className="profil_modal_user">
@@ -467,7 +478,7 @@ class ModalSign extends React.Component {
                     </div>
                     <div id="point">
                         <p>Избранное</p>
-                        <p id="lovList">{this.state.loveListCount  + 'тов.'}</p>
+                        <p id="lovList">{this.state.loveListCount + ' тов.'}</p>
                     </div>
                     <p onClick={this.exit}>Выход</p>
                 </div >
