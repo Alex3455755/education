@@ -39,7 +39,7 @@ app.post('/input', jsonParser, function (req, res) {
       return name.match(new RegExp(request.value, 'gui'))
     });
     if (result.length) { res.json(result) }
-    else { res.json([{ id: 0,name: "нет данных", price: 0, amount: "", oldPrice: "", img: "" }]) }
+    else { res.json([{ id: 0, name: "нет данных", price: 0, amount: "", oldPrice: "", img: "" }]) }
   });
 });
 
@@ -81,27 +81,28 @@ app.post('/lovers', jsonParser, function (req, res) {
 });
 
 app.post('/auth', jsonParser, function (req, res) {
-  try {
-    const result = jwt.verify(req.body.jwt, secret);
-    connection.query('SELECT lovleList,cartList from users where name=?', [result.name], (err, data) => {
-      if (data[0]) {
-        const list = data[0] ? data[0].lovleList.split(' ').filter((item) => item != '') : [];
-        res.json({
-          name: result.name, succes: true, role: result.role,
-          loveList: list, cartList: data[0].cartList === ' ' ? '' : JSON.parse(data[0].cartList)
-        });
-      }else{
-        res.json({
-          name: result.name, succes: true, role: result.role,
-          loveList: [], cartList: [],
-        });
-      }
+  if (req.body.jwt !== '') {
+    try {
+      const result = jwt.verify(req.body.jwt, secret);
+      connection.query('SELECT lovleList,cartList from users where name=?', [result.name], (err, data) => {
+        if (data[0]) {
+          const list = data[0] ? data[0].lovleList.split(' ').filter((item) => item != '') : [];
+          res.json({
+            name: result.name, succes: true, role: result.role,
+            loveList: list, cartList: data[0].cartList === ' ' ? '' : JSON.parse(data[0].cartList)
+          });
+        } else {
+          res.json({
+            name: result.name, succes: true, role: result.role,
+            loveList: [], cartList: [],
+          });
+        }
 
-    });
-  } catch (TokenExpiredError) {
-    console.log('time men');
+      });
+    } catch (TokenExpiredError) {
+      console.log('time men');
+    }
   }
-
 });
 
 app.post('/login', jsonParser, function (req, res) {
@@ -124,14 +125,14 @@ app.post('/login', jsonParser, function (req, res) {
 app.post('/list', jsonParser, (req, res) => {
   const result = jwt.verify(req.body.jwt, secret);
   connection.query('SELECT lovleList,cartList FROM users WHERE name=?', [result.name], (err, data) => {
-    if(data[0]){
+    if (data[0]) {
       res.json({
         lovleList: data[0].lovleList.split(' ').filter((item) => item != ''),
         cartList: data[0].cartList === ' ' ? '' : JSON.parse(data[0].cartList),
         name: result.name,
       });
     }
-    else{res.json({lovleList: [],cartList: [],name: result.name})}
+    else { res.json({ lovleList: [], cartList: [], name: result.name }) }
   });
 });
 
