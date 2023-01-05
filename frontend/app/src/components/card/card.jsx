@@ -62,15 +62,15 @@ export default class Card extends React.Component {
     }
     renderSale() {
         if (this.sale) {
-            return <div class="sale_lable">%</div>
+            return <div className="sale_lable">%</div>
         }
     }
     ChangeBacket() {
         if (this.inCart) {
-            <div class="counter_in_backet">
-                <p class="add_cat remove_cat">-</p>
-                <p class="counter">{this.cartCount}</p>
-                <p class="add_cat">+</p>
+            <div className="counter_in_backet">
+                <p className="add_cat remove_cat">-</p>
+                <p className="counter">{this.cartCount}</p>
+                <p className="add_cat">+</p>
             </div>
         } else {
             return <button className="btn_in_backet">В корзину</button>
@@ -93,7 +93,7 @@ export default class Card extends React.Component {
                     <div className="buy">
                         <div className="price_box">
                             <div className={"real_price" + (this.sale ? ' sale_price' : '')}>{`${this.price},00 ₽/шт`}</div>
-                            {this.oldPrice ? <div class="old_price">{this.oldPrice + '₽'}</div> : ''}
+                            {this.oldPrice ? <div className="old_price">{this.oldPrice + '₽'}</div> : ''}
                         </div>
                         {this.ChangeBacket()}
                     </div>

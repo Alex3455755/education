@@ -368,7 +368,9 @@ class ModalSearch extends React.Component {
                     <div className="cards_search">
                         {this.state.resultList.map((item) => {
                             return <Card key={item.id} id={item.id} price={item.price} img={item.img}
-                                name={item.name} count={item.amount} dopClass=' search_card' inlov={this.state.listlov.indexOf(item.id.toString()) !== -1} />
+                                name={item.name} count={item.amount} dopClass=' search_card' 
+                                inlov={this.state.listlov.indexOf(item.id.toString()) !== -1} 
+                                sale={item.sale} oldPrice={item.oldPrice} />
                         })}
                     </div>
                 </div>

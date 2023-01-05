@@ -105,6 +105,19 @@ app.post('/auth', jsonParser, function (req, res) {
   }
 });
 
+app.get('/sale', function (req, res) {
+  connection.query("SELECT name,price,amount,oldPrice,sale,img,id FROM cards WHERE sale=?", [true], function (err, data) {
+    const card = [];
+    for (let i of data) {
+      if (i == data[data.length - 1]) {
+        card.push({ name: i.name, amount: i.amount, price: i.price, oldPrice: i.oldPrice, saleVisible: i.sale, img: i.img, id: i.id, haveImg: true, isLastCard: true });
+      }
+      else { card.push({ name: i.name, amount: i.amount, price: i.price, oldPrice: i.oldPrice, saleVisible: i.sale, id: i.id, img: i.img, haveImg: true, }) }
+    }
+    res.json(card);
+  })
+})
+
 app.post('/login', jsonParser, function (req, res) {
   const name = req.body.name;
   const password = req.body.password;
