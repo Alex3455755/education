@@ -337,18 +337,23 @@ class ModalSearch extends React.Component {
             body: JSON.stringify(inputValue)
         })
             .then(res => (res.json()))
-            .then(datain => {   
-                fetch(link + '/list', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json;charset=utf-8'
-                    },
-                    body: JSON.stringify({ jwt: document.cookie }),
-                })
-                    .then((res) => res.json())
-                    .then((data) => {
-                        this.setState({ listlov: data.lovleList, resultList: datain});
+            .then(datain => {
+                if (window.userSign){
+                    fetch(link + '/list', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json;charset=utf-8'
+                        },
+                        body: JSON.stringify({ jwt: document.cookie }),
                     })
+                        .then((res) => res.json())
+                        .then((data) => {
+                            this.setState({ listlov: data.lovleList, resultList: datain});
+                        })
+                }else{
+                    this.setState({resultList: datain});
+                }
+                
             })
 
     }
