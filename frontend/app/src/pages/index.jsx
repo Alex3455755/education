@@ -6,9 +6,15 @@ export default class Index extends React.Component {
     constructor(props) {
         super(props)
         this.state = { listsale: [], listlov: [] }
+        this.list = []
 
     }
     render() {
+        fetch('http://192.168.0.52:3000/elems')
+            .then((res) => res.json())
+            .then((data) => {
+                this.list = data.elems
+            })
         fetch("http://192.168.0.52:3000/sale")
             .then((res) => res.json())
             .then((datain) => {
@@ -69,8 +75,11 @@ export default class Index extends React.Component {
                         })}
                     </div>
                 </div>
-                <CatalogMenu title="Заморозка" />
-                <CatalogMenu isSale={true} title="Скидки" />
+                {this.list.map((item) => {
+                    return (
+                        <CatalogMenu title={item.title} key={this.list.indexOf(item)} list={item.list} isSale={item.isSale} />
+                    )
+                })}
             </div>
         )
     }
@@ -83,10 +92,10 @@ class SalesTop extends React.Component {
     }
     render() {
         return (
-            <div class="sales_top">
-                <h4 class="title_saels">{this.title}</h4>
-                <button class="show_all">Смотреть все
-                    <div class="arrow_sales"></div>
+            <div className="sales_top">
+                <h4 className="title_saels">{this.title}</h4>
+                <button className="show_all">Смотреть все
+                    <div className="arrow_sales"></div>
                 </button>
             </div>
         )
@@ -94,19 +103,35 @@ class SalesTop extends React.Component {
 }
 
 class ElemColumn extends React.Component {
+    constructor(props) {
+        super(props)
+        this.title1 = props.title1;
+        this.title2 = props.title2;
+        this.class = props.class;
+        this.img1 = props.img1;
+        this.img2 = props.img2;
+        this.lable = props.lable;
+        this.isLast = props.isLast;
+    }
     render() {
         return (
-            <div class="elem_column">
-                <div class="elem elem_three">
-                    <h5 class="name_elem">Пельмени, вареники и равиоли</h5>
-                    <img src="img/pelmeshki.png" alt="равиоли" class="img_elem twenty" />
+            <div className="elem_column">
+                <div className={'elem ' + this.class}>
+                    <h5 className="name_elem">{this.title1}</h5>
+                    {this.img1.map((item) => {
+                        return (
+                            <img src={item.dir} alt="равиоли" key={this.img1.indexOf(item)} className={"img_elem " + item.classImg} />
+                        )
+                    })}
+                    <div className={this.lable ? "promo_code" : ''}>{this.lable}</div>
                 </div>
-                <div class="elem elem_three">
-                    <h5 class="name_elem">Хинкали и манты</h5>
-                    <img src="img/khinkali.png" alt="равиоли" class="img_elem twenty_one" />
-                    <img src="img/khinkali.png" alt="равиоли" class="img_elem khinkal-1" />
-                    <img src="img/khinkali.png" alt="равиоли" class="img_elem khinkal-2" />
-
+                <div className={this.title2 ? ('elem ' + this.class) : ''}>
+                    <h5 className="name_elem">{this.title2}</h5>
+                    {this.img2.map((item) => {
+                        return (
+                            <img src={item.dir} alt="равиоли" key={this.img2.indexOf(item)} className={"img_elem " + item.classImg} />
+                        )
+                    })}
                 </div>
             </div>
         )
@@ -117,76 +142,25 @@ class CatalogMenu extends React.Component {
     constructor(props) {
         super(props);
         this.isSale = props.isSale;
-        this.title = props.title
+        this.title = props.title;
+        this.list = props.list;
     }
     render() {
-        if (this.isSale) {
-            return (
-                <div class="sales supermarket" id="sales">
-                    <SalesTop title={this.title} />
-                    <div class="elems">
-                        <div class="elem_column">
-                            <div class="elem elem_five one_sale">
-                                <h5 class="name_elem name_elem_two">Сделай предзаказ в кулинарии со скидкой</h5>
-                                <img src="img/cooking.png" alt="равиоли" class="img_elem thirdty" />
-                            </div>
-                        </div>
-                        <div class="elem_column">
-                            <div class="elem elem_five two_sale">
-                                <h5 class="name_elem name_elem_two">Праздник к нам приходит</h5>
-                                <div class="promo_code">15% скидка</div>
-                                <img src="img/coke.png" alt="равиоли" class="img_elem thirdty_one" />
-                            </div>
-                        </div>
-                        <div class="elem_column">
-                            <div class="elem elem_five three_sale">
-                                <h5 class="name_elem name_elem_two">Скидка на третий товар в корзине «Чистая линия»</h5>
-                                <img src="img/shampun.png" alt="равиоли" class="img_elem thirdty_two" />
-                            </div>
-                        </div>
-                        <div class="elem_column lastColumn">
-                            <div class="elem elem_five four_sale">
-                                <h5 class="name_elem name_elem_two">Комбо-набор 3 пиццы за 1500 р</h5>
-                                <div class="promo_code">trio1500</div>
-                                <img src="img/pizza1.png" alt="равиоли" class="img_elem thirdty_three" />
-                                <img src="img/pizza2.png" alt="равиоли" class="img_elem thirdty_four" />
-                                <img src="img/pizza3.png" alt="равиоли" class="img_elem thirdty_five" />
-                            </div>
-                        </div>
-                    </div>
+        return (
+            <div className="sales supermarket" id="other">
+                <SalesTop title={this.title} />
+                <div className="elems">
+                    {this.list.map((item) => {
+                        return (
+                            <ElemColumn title1={item.title1} title2={item.title2}
+                                class={item.class} isLast={item.last} img1={item.img1}
+                                img2={item.img2} key={this.list.indexOf(item)} 
+                                lable={item.lable} />
+                        )
+                    })}
+
                 </div>
-            )
-        } else {
-            return (
-                <div class="sales supermarket" id="other">
-                    <SalesTop title={this.title} />
-                    <div class="elems">
-                        <ElemColumn />
-                        <div class="elem_column">
-                            <div class="elem elem_three">
-                                <h5 class="name_elem">Полу-фабрикаты</h5>
-                                <img src="img/semi-manufactured.png" alt="равиоли" class="img_elem twenty_two" />
-                            </div>
-                            <div class="elem elem_three">
-                                <h5 class="name_elem">Замороженные овощи</h5>
-                                <img src="img/vegetables.png" alt="равиоли" class="img_elem twenty_three" />
-                            </div>
-                        </div>
-                        <div class="elem_column">
-                            <div class="elem elem_three">
-                                <h5 class="name_elem">Рыба и морепродукты</h5>
-                                <img src="img/fish.png" alt="равиоли" class="img_elem twenty_four" />
-                            </div>
-                        </div>
-                        <div class="elem_column lastColumn">
-                            <div class="elem elem_three">
-                                <h5 class="name_elem">Мясо</h5>
-                                <img src="img/meet.png" alt="равиоли" class="img_elem twenty_five" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            )
-        }
+            </div>
+        )
     }
 }

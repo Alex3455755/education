@@ -25,6 +25,43 @@ const catigoriesText = [
   { title: "Продукция от Ильинского", num: "7", isCheked: false, list: [""], isNoFirst: true, isElems: false },
 ];
 
+const elems = [
+  {
+    title: "Супермаркет", list: [
+      { title: "супермаркет", title1: "Вода и напитки", title2: "Масло,молоко и яйца", twoColumn: true, img1: [{ dir: "img/oilBotel.png", classImg: "" }, { dir: "img/botelWater.png", classImg: "two" }], img2: [{ dir: "img/egs.png", classImg: "four" }, { dir: "img/milkBottel.png", classImg: "five" }, { dir: "img/slivOil.png", classImg: "three" }] },
+      { title: "супермаркет", title1: "Снэки и сухофрукты", title2: "Кофе, чай и сладости", twoColumn: true, img1: [{ dir: "img/chips.png", classImg: "six" },], img2: [{ dir: "img/cofe.png", classImg: "one" },] },
+      { title: "супермаркет", title1: "Хлеб и выпечка", title2: "Макароны и крупы", twoColumn: true, img1: [{ dir: "img/pasta.png", classImg: "seven" },], img2: [{ dir: "img/bred.png", classImg: "eight" },] },
+      { title: "супермаркет", title1: "Масло, соусы и специи", title2: "Консервы и соления", last: true, twoColumn: true, img1: [{ dir: "img/spices.png", classImg: "nine" },], img2: [{ dir: "img/corn.png", classImg: "ten" }, { dir: "img/peas.png", classImg: "eleven" },] }], class: ""
+  },
+  {
+    title: "Кулинария", list: [
+      { title: "кулинария", title1: "Выпечка", title2: "Пиццы", twoColumn: true, class: "elem_two", img1: [{ dir: "img/круасан.png", classImg: "twelwe" },], img2: [{ dir: "img/пицца.png", classImg: "thirdteen" },] },
+      { title: "кулинария", title1: "Гриль-меню", title2: "Свежее Мясо", twoColumn: true, class: "elem_two", img1: [{ dir: "img/курочка.png", classImg: "fourteen" },], img2: [{ dir: "img/рулька.png", classImg: "fiveteen" },] },
+      { title: "кулинария", title1: "Салаты", title2: "Супы", twoColumn: true, class: "elem_two", img1: [{ dir: "img/салат.png", classImg: "sixteen" },], img2: [{ dir: "img/суп.png", classImg: "seventeen" },] },
+      { title: "кулинария", title1: "Горячие блюда", title2: "Десерты", last: true, twoColumn: true, class: "elem_two", img1: [{ dir: "img/паста.png", classImg: "eighteen" },], img2: [{ dir: "img/равиоли.png", classImg: "nineteen" },] }], class: "elem_two"
+  },
+  {
+    title: "Заморозка", list: [
+      { title: "заморозка", title1: "Пельмени вареники и равиоли", title2: "Хинкали и манты", twoColumn: true, class: "elem_three", img1: [{ dir: "img/пельмени.png", classImg: "twenty" },], img2: [{ dir: "img/хинкали.png", classImg: "twenty_one" }, { dir: "img/хинкали.png", classImg: "khinkal-1" }, { dir: "img/хинкали.png", classImg: "khinkal-2" },] },
+      { title: "заморозка", title1: "Полу-фабрикаты", title2: "Замороженные овощи", twoColumn: true, class: "elem_three", img1: [{ dir: "img/полу-фабрикаты.png", classImg: "twenty_two" },], img2: [{ dir: "img/овощи.png", classImg: "twenty_three" },] },
+      { title: "заморозка", title1: "Рыба и морепродукты", title2: "", class: "elem_three", img1: [{ dir: "img/рыба.png", classImg: "twenty_four" },], img2: [], }, { title1: "Мясо", title2: "", last: true, class: "elem_three", img1: [{ dir: "img/мясо.png", classImg: "twenty_five" },], img2: [], }]
+  },
+  {
+    title: "Другое", list: [
+      { title: "другое", title1: "Красота и Гигиена", title2: "", class: "elem_four", img1: [{ dir: "img/мыло.png", classImg: "twenty_six" },], img2: [] },
+      { title: "другое", title1: "Стирка и Уборка", title2: "", class: "elem_four", img1: [{ dir: "img/перчатки.png", classImg: "twenty_seven" },], img2: [] },
+      { title: "другое", title1: "Полезные Мелочи", title2: "", class: "elem_four", img1: [{ dir: "img/ножницы.png", classImg: "twenty_eight" },], img2: [] },
+      { title: "другое", title1: "Бытовая Химия", title2: "", last: true, class: "elem_four", img1: [{ dir: "img/утюг.png", classImg: "twenty_nine" },], img2: [] }]
+  },
+  {
+    title: "Скидки", isSale: true ,list: [
+      { title: "скидки", title1: "Сделай предзаказ со скидкой", title2: "", class: "one_sale elem_five", sale: true, img1: [{ dir: "img/кулинария.png", classImg: "thirdty" },], img2: [] },
+      { title: "скидки", title1: "Праздник к нам приходит", title2: "", class: "two_sale elem_five", lable: "15% скидка", sale: true, img1: [{ dir: "img/кола.png", classImg: "thirdty_one" },], img2: [] },
+      { title: "скидки", title1: "Скидка на третий товар «Чистая линия»", title2: "", class: "three_sale elem_five", sale: true, img1: [{ dir: "img/шампунь.png", classImg: "thirdty_two" },], img2: [] },
+      { title: "скидки", title1: "Комбо-набор три пиццы за 1500", title2: "", last: true, class: "four_sale elem_five", lable: "trio 1500", sale: true, img1: [{ dir: "img/пицца1.png", classImg: "thirdty_three" }, { dir: "img/пицца2.png", classImg: "thirdty_four" }, { dir: "img/пицца3.png", classImg: "thirdty_five" },], img2: [] }], class: "elem_five", isSale: true
+  },
+]
+
 const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
@@ -46,6 +83,10 @@ app.post('/input', jsonParser, function (req, res) {
 app.get('/nav', (req, res) => {
   res.json({ list: menuDate });
 });
+
+app.get('/elems', (req,res) => {
+  res.json({elems: elems});
+})
 
 app.post('/sign', jsonParser, function (req, res) {
   const name = req.body.name;
