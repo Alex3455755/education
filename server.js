@@ -26,7 +26,7 @@ const catigoriesText = [
 ];
 
 const connection = mysql.createConnection({
-  host: "localhost",
+  host: "192.168.0.52",
   user: "root",
   database: "shopDB",
   password: "MySql:65108bipE;"
