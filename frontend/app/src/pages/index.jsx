@@ -1,5 +1,6 @@
 import React from "react";
 import Card from '../components/card/card.jsx';
+import Footer from "../components/footer/footer.jsx";
 import classes from './styels.css';
 
 export default class Index extends React.Component {
@@ -80,6 +81,77 @@ export default class Index extends React.Component {
                         <CatalogMenu title={item.title} key={this.list.indexOf(item)} list={item.list} isSale={item.isSale} />
                     )
                 })}
+                <div class="sales supermarket" id="market">
+                    <div class="sales_top">
+                        <h4 class="title_saels">ДОСТАВКА И ОПЛАТА</h4>
+                    </div>
+                    <div class="map_box">
+                        <div class="advantages">
+                            <div class="advantege">
+                                <h6 class="map_name">Зоны доставки</h6>
+                                <p class="map_text">Доставка осуществляется в районе ЖК «Ильинские Луга»
+                                    (Московская обл., Красногорск, пос. Ильинское-Усово, ул. Заповедная) и ЖК «Новая Рига»
+                                    (Московская обл., Красногорск, д. Глухово, ул. Рублевское Предместье)</p>
+                            </div>
+                            <div class="advantege">
+                                <h6 class="map_name">25 минут</h6>
+                                <p class="map_text">Доставка 25 минут. Принимаем заказы с 7:00 до 23:00</p>
+                            </div>
+                            <div class="advantege">
+                                <h6 class="map_name">500 ₽</h6>
+                                <p class="map_text">Минимальная сумма бесплатной доставки с учетом скидок.
+                                    Иначе стоимость доставке 250 ₽</p>
+                            </div>
+                            <div class="advantege">
+                                <h6 class="map_name">Оплата</h6>
+                                <p class="map_text">При оформлении заказа вы можете выбрать удобный для вас спобос рассчета
+                                    <br />
+                                    Изображения продуктов могут отличаться от продуктов в заказе.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="direction">
+                            <h6 class="map_name">Карта доставки</h6>
+                            <div class="map">
+                                <img src="img/map.png" alt="map" class="map_img" />
+                                <img src="img/red_zone.png" alt="red_zone" class="red_zone" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="labels">
+                    <div class="lable lable_one">
+                        <div class="free_deliver">
+                            <h3 class="text_lable">БЕСПЛАТНАЯ ДОСТАВКА + Скидка 10%</h3>
+                            <div class="orange">
+                                <h6 class="text_orange">первого заказа</h6>
+                                <h6 class="text_orange">на заказы клинарии</h6>
+                            </div>
+                        </div>
+                        <div class="get_promo">
+                            <button class="btn_promo">Получить промокод</button>
+                        </div>
+                    </div>
+                    <div class="lable lable_two">
+                        <div class="mark-up">
+                            <h3 class="title_lable_two">Оцените магазин</h3>
+                            <p class="text_lable_two">Поделитесь впечатлениями о заказе
+                                и помогите сделать нас лучше</p>
+                        </div>
+                        <div class="feedback">
+                            <div class="stars stars_two">
+                                <img src="img/gold_star.svg" alt="star" />
+                                <img src="img/gold_star.svg" alt="star" />
+                                <img src="img/gold_star.svg" alt="star" />
+                                <img src="img/gold_star.svg" alt="star" />
+                                <img src="img/grey_star.svg" alt="grey star" />
+                            </div>
+                            <button class="btn_feedback">Оставить отзыв</button>
+                        </div>
+                        <img src="img/avacados.png" alt="avacado" class="avacado" />
+                    </div>
+                </div>
+                <Footer />
             </div>
         )
     }
@@ -154,11 +226,10 @@ class CatalogMenu extends React.Component {
                         return (
                             <ElemColumn title1={item.title1} title2={item.title2}
                                 class={item.class} isLast={item.last} img1={item.img1}
-                                img2={item.img2} key={this.list.indexOf(item)} 
+                                img2={item.img2} key={this.list.indexOf(item)}
                                 lable={item.lable} />
                         )
                     })}
-
                 </div>
             </div>
         )
