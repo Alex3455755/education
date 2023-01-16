@@ -1,6 +1,5 @@
 import React from "react";
 import Card from '../components/card/card.jsx';
-import Footer from "../components/footer/footer.jsx";
 import classes from './styels.css';
 
 export default class Index extends React.Component {
@@ -151,7 +150,6 @@ export default class Index extends React.Component {
                         <img src="img/avacados.png" alt="avacado" class="avacado" />
                     </div>
                 </div>
-                <Footer />
             </div>
         )
     }

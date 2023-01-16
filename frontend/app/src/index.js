@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import Menu from './components/menu/menu.jsx';
 import Index from './pages/index.jsx';
+import Catalog from './pages/catalog.jsx';
+import Footer from './components/footer/footer.jsx';
 import {
   BrowserRouter as Router,
   Route, Routes
@@ -10,9 +12,19 @@ import {
 const link = 'http://192.168.0.52:3000';
 window.userSign = false;
 
-class About extends React.Component {
+class Cat extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { cartList: [], loveList: [], userSign: false}
+  }
   render() {
-    return <h2 className='title'>О сайте</h2>;
+    return (
+      <div>
+        <Menu screnSizeVids={window.screen.width} userSign={this.state.userSign} />
+        <Catalog />
+        <Footer />
+      </div>
+    )
   }
 }
 class NotFound extends React.Component {
@@ -49,13 +61,14 @@ class Main extends React.Component {
     this.changeState = this.changeState.bind(this)
   }
   changeState(answer) {
-   this.setState({ userSign: answer });
+    this.setState({ userSign: answer });
   }
   render() {
     return (
       <div>
         <Menu screnSizeVids={window.screen.width} userSign={this.state.userSign} calback={this.changeState} />
         <Index />
+        <Footer />
       </div>
     )
   }
@@ -68,7 +81,7 @@ ReactDOM.createRoot(
       <div>
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/about" element={<About />} />
+          <Route path="/catalog" element={<Cat />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
