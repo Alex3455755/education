@@ -66,7 +66,7 @@ const connection = mysql.createConnection({
   host: "192.168.0.52",
   user: "root",
   database: "shopDB",
-  password: "MySql:65108bipE;"
+  password: $steps.passwords
 });
 
 app.post('/input', jsonParser, function (req, res) {
